@@ -8,7 +8,10 @@ class EmployeePayrollData{
         this.startDate = params[4];
     }
     get id(){return this._id;}
-    set id(id){this._id = id;}
+    set id(id){
+        if(id > 0) this._id = id;
+        else throw "Invalid id";
+    }
 
     get name(){return this._name;}
     set name(name){
@@ -18,13 +21,23 @@ class EmployeePayrollData{
     }
 
     get salary(){return this._salary;}
-    set salary(salary){this._salary = salary;}
+    set salary(salary){
+        if(salary > 0) this._salary = salary;
+        else throw "Enter Valid salary";
+    }
 
     get gender(){return this._gender;}
-    set gender(gender){this._gender = gender;}
+    set gender(gender){
+        let genderRegex = RegExp("^[MF]$");
+        if(genderRegex.test(gender))this._gender = gender;
+        else throw "Enter Valid gender";
+    }
 
     get startDate(){return this._startDate;}
-    set startDate(startDate){this._startDate = startDate;}
+    set startDate(startDate){
+        if(startDate <= new Date())this._startDate = startDate;
+        else throw "Enter valid date";
+    }
 
     toString(){
         const options ={ year : "numeric", month : "long", day : "numeric"};
@@ -34,10 +47,10 @@ class EmployeePayrollData{
     }
 }
 
-let employeePayrollData = new EmployeePayrollData(1, "Shreya", 100000,  "F", new Date());
+let employeePayrollData = new EmployeePayrollData(1, "Shreya", 100000, "F", new Date());
 console.log(employeePayrollData.toString());
 try{
-let newEmployeePayrollData = new EmployeePayrollData(2, "Srija", 200000, "F", new Date());
+let newEmployeePayrollData = new EmployeePayrollData(2, "Shreya", 200000, "F", new Date());
 console.log(newEmployeePayrollData.toString());
 }catch(e){
     console.error(e);
