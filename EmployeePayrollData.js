@@ -11,7 +11,11 @@ class EmployeePayrollData{
     set id(id){this._id = id;}
 
     get name(){return this._name;}
-    set name(name){this._name = name;}
+    set name(name){
+        let nameRegex = RegExp("^[A-Z]{1}[a-z]{2,}$");
+        if(nameRegex.test(name))this._name = name;
+        else throw "Name is Incorrect";
+    }
 
     get salary(){return this._salary;}
     set salary(salary){this._salary = salary;}
@@ -30,7 +34,11 @@ class EmployeePayrollData{
     }
 }
 
-let employeePayrollData = new EmployeePayrollData(1, "Shreya", 100000, "F", new Date());
+let employeePayrollData = new EmployeePayrollData(1, "Shreya", 100000,  "F", new Date());
 console.log(employeePayrollData.toString());
+try{
 let newEmployeePayrollData = new EmployeePayrollData(2, "Srija", 200000, "F", new Date());
 console.log(newEmployeePayrollData.toString());
+}catch(e){
+    console.error(e);
+}
